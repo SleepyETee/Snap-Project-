@@ -1,70 +1,265 @@
-html,
-body {
+
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-.main-header {
-  background-color: rgba(0, 0, 0, 0.3);
-  padding-bottom: 10px;
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+}
+
+/*-- Background Animation Layers --*/
+.background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.stars {
+  background: black url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png") repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.twinkling {
+  width: 100%;
+  height: 100%;
+  background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/twinkling.png") repeat;
+  background-size: 1000px 1000px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  animation: moveBackground 70s linear infinite;
+}
+.clouds {
+  width: 100%;
+  height: 100%;
+  background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/clouds_repeat.png") repeat;
+  background-size: 1000px 1000px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  animation: moveBackground 150s linear infinite;
+}
+@keyframes moveBackground {
+  from { background-position: 0 0; }
+  to { background-position: -1000px 0; }
+}
+
+/*-- Particle Effects --*/
+.particle-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.contact-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background-color: #f3f3f3;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(97, 96, 95, 0.9);
+  opacity: 0;
+  animation: fade-in-out-contact 3s infinite, float-up-contact 15s linear infinite;
+}
+
+@keyframes fade-in-out-contact {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes float-up-contact {
+  0% { transform: translateY(0) scale(0.8); }
+  100% { transform: translateY(-100px) scale(1.2); }
+}
+
+/*--Header-- */
+header {
+  text-align: center;
+  background-color: transparent;
+  padding: 20px;
 }
 
 .title {
-  text-align: center;
-  margin: 0;
-  font-size: 8em;
-  font-family: "Helvetica";
-  font-weight: normal;
-  color: white;
+  color: #fff;
+  font-size: 2.5rem;
+  font: Open Sans, sans-serif;
 }
 
-#card-container {
-  display: flex;
-  justify-content: center;
-  margin: 20px;
-}
-
-.card {
-  width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 5px;
-}
-
-.card-content {
+/*-- Main Content & Controls --*/
+main {
+  margin-top: 20px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 20px;
-  font-family: "Verdana";
-  color: #777;
 }
 
-.card-content h2 {
-  margin-top: 0;
-  font-size: 20px;
-}
-
-.card img {
-  width: 100%;
-  height: auto;
-}
-
-.footer {
+#controls {
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+  background: transparent;
+  border-radius: 6px;
   padding: 10px;
 }
 
-button {
-  text-align: center;
-  background-color: #666;
-  border: none;
-  padding-left: 10px;
-  padding-right: 10px;
-  height: 40px;
-  border-radius: 10px;
-  color: white;
-  font-size: 22px;
-  cursor: pointer;
-  margin: 5px;
+#controls input,
+#controls select,
+#controls button {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
+
+/*-- Catalog Grid & Card Template-- */
+#card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Style for the card */
+.card {
+  background-color: transparent; 
+  border: 2px solid rgba(221, 221, 221, 0.5);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: transform 0.2s ease-in-out;
+}
+
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.card h2 {
+  margin-top: 10px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.card img {
+  display: block;
+  margin: 0 auto; 
+  max-width: 100%;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  max-height: 100%;
+  width:100%;
+  height:100%;
+  object-fit: cover; 
+}
+
+
+.card ul {
+  list-style-type: none;
+}
+
+.card ul li {
+  margin-bottom: 6px;
+  line-height: 1.4;
+  color: #f3eded;
+  font-size: 0.95rem;
+}
+
+.card .actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 5px;
+}
+
+.card .actions button {
+  font-size: 0.75rem;
+  padding: 4px 6px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.card .actions .edit {
+  background-color: #f0ad4e;
+  color: #fff;
+}
+
+.card .actions .delete {
+  background-color: #d9534f;
+  color: #fff;
+}
+.card .actions .delete:hover {
+  background-color: #c9302c;
+}
+/*--Add Item Section-- */
+#addItemSection {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin: 30px auto;
+  max-width: 800px;
+}
+
+#addItemSection h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+#addItemForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+#addItemForm input,
+#addItemForm select,
+#addItemForm button {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex: 1;
+  min-width: 150px;
+}
+
+/*--Footer Styling-- */
+footer {
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  padding: 12px;
+  margin-top: 30px;
+}
+

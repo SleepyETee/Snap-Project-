@@ -2,30 +2,109 @@
 <html>
   <head>
     <title>LA TV Shows | Home</title>
-    <meta name="description" content="A Catalog of Shows Set in Los Angeles" />
+    <meta name="description" content="A Catalog of TV Shows Set in Los Angeles" />
     <link rel="stylesheet" href="style.css" />
-    <script type="text/javascript" src="scripts.js"></script>
+    <script type="text/javascript" src="scripts.js" defer></script>
   </head>
 
+  <!-- Body -->
   <body>
+    <!--Animation Layer-->
+    <div class="background-container">
+      <div class="stars"></div>
+      <div class="twinkling"></div>
+      <div class="clouds"></div>
+    </div>
+    
     <header class="main-header">
       <h1 class="title">LA TV Shows</h1>
     </header>
+    
+    <!-- Operation control bar -->
+    <div id="controls">
+      <!-- Filter by Genre -->
+      <select id="filterSelect">
+        <option value="all">All Genres</option>
+        <option value="drama">Drama</option>
+        <option value="comedy">Comedy</option>
+        <option value="reality">Reality</option>
+        <option value="documentary">Documentary</option>
+      </select>
+      
+      <!-- Search Input -->
+      <input type="text" id="searchInput" placeholder="Search TV Shows..." />
+      
+      <!-- Action Buttons -->
+      <select id="sortSelect">
+        <option value="">Sort by...</option>
+        <option value="name">Sort by Name (A-Z)</option>
+        <option value="yearAsc">Sort by Year (Asc)</option>
+        <option value="yearDesc">Sort by Year (Desc)</option>
+        <option value="ratingAsc">Sort by Rating (Asc)</option>
+        <option value="ratingDesc">Sort by Rating (Desc)</option>
+      </select>
+    </select>
+      <button id="shuffleButton">Shuffle Shows</button>
+      <button id="resetButton">Reset Catalog</button>
+      <!-- <button id="groupToggleButton">Toggle Group View</button> -->
+    </div>
+    
     <div id="card-container"></div>
-    <div class="card" style="display: none">
+    
+    <!-- Hidden Card Template: Used by scripts.js to clone and populate dynamic cards -->
+    <div class="card" style="display: none;">
       <div class="card-content">
         <h2>TV Show Title</h2>
         <img src="" alt="TV Show Poster" />
         <ul>
-          <li>Bullet Point 1</li>
-          <li>Bullet Point 2</li>
-          <li>Bullet Point 3</li>
+          <li><strong>Genre:</strong></li>
+          <li><strong>Network:</strong></li>
+          <li><strong>Year:</strong></li>
+          <li><strong>Rating:</strong></li>
+          <li><strong>Lead:</strong></li>
+          <li><strong>Tagline:</strong></li>
+          <li><strong>Description:</strong></li>
         </ul>
       </div>
     </div>
-    <div class="footer">
-      <button onclick="quoteAlert();">Get A Quote!</button>
-      <button onclick="removeLastCard();">Remove A Card!</button>
-    </div>
+    
+    <!-- Add section-->
+    <section id="addItemSection">
+      <h2>Add a TV Show</h2>
+      <form id="addItemForm">
+        <input type="text" id="itemName" placeholder="Show Name" required />
+        <select id="itemCategory" required>
+          <option value="">Select Genre</option>
+          <option value="drama">Drama</option>
+          <option value="comedy">Comedy</option>
+          <option value="reality">Reality</option>
+          <option value="documentary">Documentary</option>
+        </select>
+        <input type="text" id="itemDescription" placeholder="Description" required />
+        <!-- Release Year -->
+        <input type="number" id="itemValue" placeholder="Year" required />
+        <!-- Network-->
+        <select id="itemRarity" required>
+          <option value="">Select Network</option>
+          <option value="ABC">ABC</option>
+          <option value="NBC">NBC</option>
+          <option value="CBS">CBS</option>
+          <option value="FOX">FOX</option>
+          <option value="HBO">HBO</option>
+        </select>
+        <!-- Rating -->
+        <input type="number" id="itemRating" placeholder="Rating (1-10)" required />
+        <!-- Lead actor/actress -->
+        <input type="text" id="itemElement" placeholder="Lead Actor/Actress" required />
+        <!-- Tagline for the TV show -->
+        <input type="text" id="itemBonus" placeholder="Show Tagline" required />
+        <button type="submit">Add TV Show</button>
+      </form>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2025 LA TV Shows. All rights reserved.</p>
+    </footer>
   </body>
 </html>
